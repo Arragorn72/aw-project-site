@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andreas Wechner – Projekte</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root{
+      --bg: #ffffff;
+      --fg: #10243a;
+      --muted: #475569;
+      --accent: #0b7285;
+      --accent-weak:#d2eef2;
+      --card:#f6f8fb;
+      --radius: 16px;
+      --shadow: 0 10px 25px rgba(2, 8, 23, .06);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial;
+    }
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font)}
+    header{background:var(--accent);color:#fff;padding:1rem;text-align:center}
+    main{padding:2rem;max-width:1100px;margin:auto}
+    h1,h2,h3{color:var(--accent)}
+    a{color:var(--accent)}
+    .filters{margin-bottom:1rem;display:flex;flex-wrap:wrap;gap:.5rem}
+    select,input{padding:.5rem;border-radius:8px;border:1px solid #ccc}
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+    .card{background:var(--card);padding:1rem;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .tags{display:flex;flex-wrap:wrap;gap:.3rem}
+    .tag{background:var(--accent-weak);padding:.3rem .6rem;border-radius:999px;font-size:.8rem}
+    footer{margin-top:2rem;color:#64748b;font-size:.9rem}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Andreas Wechner – Projekte</h1>
+  </header>
+  <main>
+    <section id="home">
+      <h2>Über mich</h2>
+      <p>Ich bewege mich seit über 15 Jahren an der Schnittstelle zwischen Business und IT und gestalte Lösungen, die im Alltag funktionieren. Ich übersetze komplexe Anforderungen in klare Prozesse, schaffe Struktur und fördere Akzeptanz im Wandel. Meine Erfahrung bringt Ruhe, Qualität und Orientierung in anspruchsvolle Projekte.</p>
+    </section>
+    <section id="projects">
+      <h2>Projektübersicht</h2>
+      <div class="filters">
+        <input id="q" type="search" placeholder="Suche...">
+        <select id="f-sector"><option value="">Branche</option></select>
+        <select id="f-role"><option value="">Rolle</option></select>
+        <select id="f-tech"><option value="">Technologie</option></select>
+        <select id="f-year"><option value="">Jahr</option></select>
+      </div>
+      <div class="projects" id="list"></div>
+    </section>
+    <footer>
+      <div>Kontakt: <a href="mailto:wechnera@gmx.net">wechnera@gmx.net</a></div>
+      <div>Diese Seite ist bewusst nicht indexiert. Teile den Link nur gezielt.</div>
+    </footer>
+  </main>
+  <script>
+    const PROJECTS = [
+      {id:"p_swissgrid",title:"S/4HANA Rollen- & Berechtigungskonzept",client:"Swissgrid AG, Aarau (CH)",year:2023,sector:"Energie",role:"Berechtigungen · Konzeption · Implementierung · Testbegleitung",tech:["SAP S/4HANA"],impact:["Definition des Rollen- und Berechtigungskonzeptes für S/4HANA","Implementierung der Rollen im System","Testbegleitung, Optimierung und Prüfung interner Richtlinien"]},
+      {id:"p_aew",title:"S/4HANA Berechtigungskonzept",client:"AEW Energie AG, Aarau (CH)",year:2021,sector:"Energie",role:"Berechtigungen · Konzeption",tech:["SAP S/4HANA"],impact:["Definition des Rollen- und Berechtigungskonzeptes für S/4HANA"]},
+      {id:"p_caritas",title:"Voranalyse Hybris Marketing & Umsysteme",client:"Caritas International, Freiburg (DE)",year:2020,sector:"NGO / Non-Profit",role:"Businessanalyse · Datenqualität",tech:["SAP Hybris Marketing"],impact:["Analyse und Eingrenzung von Fehlern in den Datenbeständen"]},
+      {id:"p_sbb",title:"Einführung B2B‑Prozesse (SAP CRM)",client:"SBB, Bern (CH)",year:2018,sector:"Transport / ÖV",role:"Businessanalyse · Workshops · Customizing",tech:["SAP CRM"],impact:["Planung & Durchführung von Workshops zur Analyse/Definition der Prozesse","Customizing des CRM‑Systems","Definition von Schnittstellen zu Umsystemen"]},
+      {id:"p_axa",title:"Zentraler Partner in SAP CRM 7.1",client:"AXA Winterthur (CH)",year:2019,sector:"Versicherung",role:"Businessanalyse · Customizing · Dokumentation · Berechtigungen",tech:["SAP CRM 7.1","SAP ERP","SAP BI"],impact:["Aufbau des Datenmodells 'Zentraler Partner'","Workshops, Prozessdefinition, Oberflächen‑Usability‑Requirements","Customizing & Schnittstellen zu Umsystemen","Technische Dokumentation (Datenmodell, Use Cases, Design, Berechtigungsmatrix)","Konzeption & Betreuung der Berechtigungen im CRM"]},
+      {id:"p_bbl",title:"Kundenzufriedenheitsanalyse",client:"Bundesamt für Bauten und Logistik (BBL), Bern (CH)",year:2015,sector:"Public",role:"Konzept · Umsetzung · Analyse",tech:["Webportal","Survey"],impact:["Erstellung des Konzepts für die Umfrage","Umsetzung der Fragebögen im Webportal","Auswertung und Ableitung von Handlungsfeldern/Empfehlungen"]},
+      {id:"p_helvetia",title:"360°‑Kundensicht mit SAP",client:"Helvetia Versicherungen, Basel (CH)",year:2013,sector:"Versicherung",role:"Dokumentation · Change Request · Test · Berechtigungen · Workshops · Customizing",tech:["SAP CRM","SAP BI"],impact:["Aufbau & Führung des Testteams, Definition der Testprozesse","Planung/Überwachung von Change Requests","Berechtigungskonzept in Abstimmung mit Vertriebsvorgaben","Customizing & Prozessworkshops"]},
+      {id:"p_baumer_evalanche",title:"Einführung Massenmailing (Evalanche)",client:"Baumer AG, Frauenfeld (CH)",year:2010,sector:"Industrie",role:"Projektleitung · Prozessanalyse · Schnittstellen",tech:["Evalanche","SAP CRM"],impact:["Analyse des Geschäftsprozesses","Definition/Erweiterung der Schnittstelle SAP ↔ Evalanche"]},
+      {id:"p_baumer_crm70",title:"Releasewechsel CRM 7.0 & Performance/Usability",client:"Baumer AG, Frauenfeld (CH)",year:2010,sector:"Industrie",role:"Projektleitung · Customizing · Abnahme",tech:["SAP CRM 7.0"],impact:["Vorbereitung & Begleitung des technischen Upgrades","Customizing, Systemcheck und Abnahme"]},
+      {id:"p_baumer_opp",title:"Einführung Opportunity Management",client:"Baumer AG, Frauenfeld (CH)",year:2010,sector:"Industrie",role:"Projektleitung · Konzept · Customizing · Rollout",tech:["SAP CRM","SAP BI"],impact:["Konzept für Gruppen‑Reporting & BI‑Auswertungen","Customizing & BI‑Extractor","Rollout & Schulungen"]},
+      {id:"p_baumer_cfs",title:"Customer Fact Sheet (BI‑Berichte)",client:"Baumer AG, Frauenfeld (CH)",year:2010,sector:"Industrie",role:"Projektleitung · Reporting",tech:["SAP BI"],impact:["Definition der BI‑Berichte fürs Customer Fact Sheet","Erweiterung der Datenbeschaffungsklassen aus dem BI"]},
+      {id:"p_baumer_ops",title:"Applikationsverantwortung CRM",client:"Baumer AG, Frauenfeld (CH)",year:2010,sector:"Industrie",role:"Betrieb · Rollouts · Berechtigungen · Koordination",tech:["SAP CRM","Groupware","Office Integration"],impact:["Sicherstellung Betrieb & Middleware‑Monitoring","Rollouts in Tochtergesellschaften (Asien/Europa/USA)","Groupware‑Integration (Client), XML‑Wordvorlagen","Definition von Berechtigungsobjekten & Ausprägungen","Koordination externer Ressourcen"]},
+      {id:"p_motorex",title:"Einführung SAP BI",client:"Motorex AG, Langenthal (CH)",year:2010,sector:"Industrie",role:"Teilprojektleitung BI · Reporting",tech:["SAP BI"],impact:["Konzept für Auswertungen & Analysen auf SAP BI","Definition des Customer Fact Sheets"]},
+      {id:"p_repower",title:"Insieme 1 & 2 – Management Cockpit & Kennzahlen",client:"Repower (vorm. Rätia Energie), Poschiavo (CH)",year:2010,sector:"Energie",role:"Teilprojektleitung · Reporting · Konsolidierung",tech:["SAP BI","SAP ECC"],impact:["Definition Berichte & KPIs auf Gruppenstufe","Implementierung inkl. Konsolidierung/ECC‑Anbindung"]},
+      {id:"p_efp_sales",title:"Projekt 'Sales' – SAP CRM Einführung",client:"EFP Consulting AG, Bern (CH)",year:2010,sector:"Consulting",role:"Projektleitung · Konzeption · Customizing · Betrieb",tech:["SAP CRM"],impact:["Konzeption & Implementierung, Customizing aller Prozesse","Tests, Betrieb & Middleware‑Monitoring"]},
+      {id:"p_creabeton",title:"Einführung SAP CRM und BI",client:"Creabeton AG, Lyss (CH)",year:2009,sector:"Industrie",role:"Blueprint · Customizing · BI‑Datenbasis & Reports",tech:["SAP CRM","SAP BI 3.5"],impact:["Business Blueprint CRM & BI","Aufbau Datenbasis (InfoCubes, DSOs, Ladeprozesse)","Erstellung BI‑Auswertungen (Query Designer)"]}
+    ];
+
+    const q=document.getElementById('q'),fSector=document.getElementById('f-sector'),fRole=document.getElementById('f-role'),fTech=document.getElementById('f-tech'),fYear=document.getElementById('f-year'),list=document.getElementById('list');
+    function unique(arr){return Array.from(new Set(arr)).sort()}
+    function seedFilters(){
+      unique(PROJECTS.map(p=>p.sector)).forEach(v=>fSector.innerHTML+=`<option>${v}</option>`);
+      unique(PROJECTS.map(p=>p.role)).forEach(v=>fRole.innerHTML+=`<option>${v}</option>`);
+      unique(PROJECTS.flatMap(p=>p.tech)).forEach(v=>fTech.innerHTML+=`<option>${v}</option>`);
+      unique(PROJECTS.map(p=>p.year)).sort((a,b)=>b-a).forEach(v=>fYear.innerHTML+=`<option>${v}</option>`);
+    }
+    function matches(p){
+      const term=(q.value||'').toLowerCase();
+      return (!fSector.value||p.sector===fSector.value)&&(!fRole.value||p.role===fRole.value)&&(!fTech.value||(p.tech||[]).includes(fTech.value))&&(!fYear.value||String(p.year)===fYear.value)&&(!term||[p.title,p.client,(p.impact||[]).join(' ')].join(' ').toLowerCase().includes(term));
+    }
+    function render(){
+      const items=PROJECTS.filter(matches);
+      list.innerHTML=items.map(p=>`<div class='card'><h3>${p.title}</h3><small>${p.client} · ${p.year}</small><div class='tags'><span class='tag'>${p.sector}</span><span class='tag'>${p.role}</span>${(p.tech||[]).map(t=>`<span class='tag'>${t}</span>`).join('')}</div><ul>${(p.impact||[]).map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+    }
+    seedFilters();[q,fSector,fRole,fTech,fYear].forEach(el=>el.addEventListener('input',render));render();
+  </script>
+</body>
+</html>

@@ -10,54 +10,67 @@
       --bg: #ffffff;
       --fg: #10243a;
       --muted: #475569;
-      --accent: #1D0847;
-      --accent-weak:#B5ADE5;
+      --accent: #0b7285;
+      --accent-weak:#d2eef2;
       --card:#f6f8fb;
       --radius: 16px;
       --shadow: 0 10px 25px rgba(2, 8, 23, .06);
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial;
     }
+    *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font)}
-    header{background:var(--accent);color:#fff;padding:1rem;text-align:center}
-    .header-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
 
-.profile-pic {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 3px solid white;
-  object-fit: cover;
-  box-shadow: var(--shadow);
-}
+    header{background:var(--accent);color:#fff;padding:18px 16px 10px;text-align:center}
 
-.header-text h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  color: white;
-}
+    /* Header content */
+    .header-content{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+    .profile-pic{width:92px;height:92px;border-radius:50%;border:3px solid #fff;object-fit:cover;box-shadow:var(--shadow)}
+    .header-text h1{margin:0;font-size:1.9rem;line-height:1.1;color:#fff}
+    .header-text .tagline{margin:6px 0 0;font-size:1.05rem;color:#e0f7f8;letter-spacing:.2px}
 
-.header-text .tagline {
-  margin: 0;
-  font-size: 1rem;
-  color: #e0f7f8;
-  letter-spacing: 0.5px;
-}
-    main{padding:2rem;max-width:1100px;margin:auto}
-    h1,h2,h3{color:var(--accent)}
+    /* Navigation */
+    .nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    .nav-btn{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;padding:9px 12px;border-radius:999px;cursor:pointer}
+    .nav-btn.active{background:#fff;color:var(--accent);border-color:#fff}
+
+    main{padding:24px;max-width:1100px;margin:auto}
+    h2{margin:0 0 10px;color:var(--accent)}
+    h3{margin:0 0 8px;color:var(--fg)}
+    p{margin:0 0 12px;color:var(--muted);line-height:1.55}
     a{color:var(--accent)}
-    .filters{margin-bottom:1rem;display:flex;flex-wrap:wrap;gap:.5rem}
-    select,input{padding:.5rem;border-radius:8px;border:1px solid #ccc}
-    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
-    .card{background:var(--card);padding:1rem;border-radius:var(--radius);box-shadow:var(--shadow)}
-    .tags{display:flex;flex-wrap:wrap;gap:.3rem}
-    .tag{background:var(--accent-weak);padding:.3rem .6rem;border-radius:999px;font-size:.8rem}
-    footer{margin-top:2rem;color:#64748b;font-size:.9rem}
+
+    /* Cards */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+    .card{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card strong{display:block;margin-bottom:6px}
+
+    /* Filters */
+    .filters{margin:14px 0 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    select,input{padding:10px 12px;border-radius:10px;border:1px solid #cbd5e1;background:#fff}
+    input[type="search"]{min-width:260px;flex:1}
+    .btn{padding:10px 12px;border-radius:10px;border:1px solid #cbd5e1;background:#fff;cursor:pointer}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px}
+    .tag{background:var(--accent-weak);padding:4px 10px;border-radius:999px;font-size:.82rem}
+    ul{margin:0;padding-left:18px;color:var(--muted)}
+    li{margin:0 0 6px}
+
+    /* Sections (tabs) */
+    section[hidden]{display:none}
+
+    /* Contact */
+    .contact-list{display:grid;gap:10px}
+    .download-list{display:grid;gap:8px;margin-top:10px}
+
+    footer{margin-top:22px;color:#64748b;font-size:.92rem}
+
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      input[type="search"]{min-width:180px}
+    }
   </style>
 </head>
 <body>
@@ -69,27 +82,90 @@
         <p class="tagline">Brückenbauer zwischen Business und IT</p>
       </div>
     </div>
+    <nav class="nav" aria-label="Navigation">
+      <button class="nav-btn active" data-tab="usp" type="button">USP</button>
+      <button class="nav-btn" data-tab="projects" type="button">Projekte</button>
+      <button class="nav-btn" data-tab="contact" type="button">Kontakt</button>
+    </nav>
   </header>
   <main>
-    <section id="home">
-      <h2>Über mich</h2>
-      <p>Ich bewege mich seit über 15 Jahren an der Schnittstelle zwischen Business und IT und gestalte Lösungen, die im Alltag funktionieren. Ich übersetze komplexe Anforderungen in klare Prozesse, schaffe Struktur und fördere Akzeptanz im Wandel. Meine Erfahrung bringt Ruhe, Qualität und Orientierung in anspruchsvolle Projekte.</p>
+    <!-- 1) USP / HR-tauglich -->
+    <section id="usp" aria-labelledby="usp-title">
+      <h2 id="usp-title">USP</h2>
+      <p><strong>Wofür ich stehe:</strong> Ich übersetze Fachbedürfnisse in klare Anforderungen und tragfähige Lösungen – so, dass Fachbereich und IT wirklich zusammenarbeiten und die Lösung im Alltag genutzt wird.</p>
+      <p><strong>Womit du rechnen kannst:</strong> Struktur, saubere Analyse, pragmatische Entscheidungen, kontrollierte Umsetzung – und Kommunikation ohne Nebelgranaten.</p>
+
+      <div class="grid" aria-label="HR-Relevante Nutzenpunkte">
+        <div class="card">
+          <strong>Business↔IT Brücke</strong>
+          Kläre Anforderungen, moderiere Stakeholder und bringe Entscheidungen herbei – ohne Theater.
+        </div>
+        <div class="card">
+          <strong>Stabile Lösungen im Betrieb</strong>
+          Fokus auf Qualität, Akzeptanz und Alltagstauglichkeit (nicht nur "Go‑Live").
+        </div>
+        <div class="card">
+          <strong>Komplexität runterbrechen</strong>
+          Prozesse, Daten und Abhängigkeiten sichtbar machen – damit Teams sinnvoll liefern können.
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <strong>Zielrollen</strong>
+        <div class="tags">
+          <span class="tag">Product Owner</span>
+          <span class="tag">Requirements Engineer</span>
+          <span class="tag">Business Engineer / Analyst</span>
+          <span class="tag">IT Projektleitung</span>
+        </div>
+        <p style="margin:0">Schwerpunkt: Digitalisierung / Prozess- & Applikationsverantwortung, Stakeholder‑Management, SAP‑nahe Umfelder.</p>
+      </div>
+
+      <footer>Hinweis: Diese Seite ist bewusst nicht indexiert. Teile den Link nur gezielt.</footer>
     </section>
-    <section id="projects">
-      <h2>Projektübersicht</h2>
-      <div class="filters">
-        <input id="q" type="search" placeholder="Suche...">
+
+    <!-- 2) Projekte -->
+    <section id="projects" hidden aria-labelledby="projects-title">
+      <h2 id="projects-title">Projekte</h2>
+
+      <div class="filters" aria-label="Filter">
+        <input id="q" type="search" placeholder="Suche (Kunde, Titel, Ergebnis)…">
         <select id="f-sector"><option value="">Branche</option></select>
         <select id="f-role"><option value="">Rolle</option></select>
         <select id="f-tech"><option value="">Technologie</option></select>
         <select id="f-year"><option value="">Jahr</option></select>
+        <button class="btn" id="reset" type="button">Filter zurücksetzen</button>
       </div>
-      <div class="projects" id="list"></div>
+
+      <div class="projects" id="list" aria-live="polite"></div>
+
+      <footer>Tip: Für sensible Projekte kannst du Kundennamen anonymisieren (NDA/Vertraulichkeit).</footer>
     </section>
-    <footer>
-      <div>Kontakt: <a href="mailto:wechnera@gmx.net">wechnera@gmx.net</a></div>
-      <div>Diese Seite ist bewusst nicht indexiert. Teile den Link nur gezielt.</div>
-    </footer>
+
+    <!-- 3) Kontakt / Downloads -->
+    <section id="contact" hidden aria-labelledby="contact-title">
+      <h2 id="contact-title">Kontakt</h2>
+
+      <div class="card">
+        <div class="contact-list">
+          <div><strong>E‑Mail:</strong> <a href="mailto:wechnera@gmx.net">wechnera@gmx.net</a></div>
+          <div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/DEIN-LINKEDIN" target="_blank" rel="noopener">Profil öffnen</a></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <strong>Downloads</strong>
+        <div class="download-list">
+          <a class="btn primary" href="cv.pdf" download>CV herunterladen (PDF)</a>
+          <!-- Optional: weitere Dokumente -->
+          <!-- <a class="btn" href="projektliste.pdf" download>Projektliste (PDF)</a> -->
+          <!-- <a class="btn" href="zeugnisse.pdf" download>Zeugnisse (PDF)</a> -->
+        </div>
+        <p style="margin-top:10px">Lege die Dateien (z. B. <code>cv.pdf</code>) einfach ins gleiche Verzeichnis wie <code>index.html</code> und pushe sie nach GitHub. Vercel liefert sie dann automatisch aus.</p>
+      </div>
+
+      <footer>Wenn du willst, kann man hier auch den QR‑Code als Bild einbinden (z. B. <code>qr.png</code>).</footer>
+    </section>
   </main>
   <script>
     const PROJECTS = [
@@ -111,23 +187,92 @@
       {id:"p_creabeton",title:"Einführung SAP CRM und BI",client:"Creabeton AG, Lyss (CH)",year:2009,sector:"Industrie",role:"Blueprint · Customizing · BI‑Datenbasis & Reports",tech:["SAP CRM","SAP BI 3.5"],impact:["Business Blueprint CRM & BI","Aufbau Datenbasis (InfoCubes, DSOs, Ladeprozesse)","Erstellung BI‑Auswertungen (Query Designer)"]}
     ];
 
-    const q=document.getElementById('q'),fSector=document.getElementById('f-sector'),fRole=document.getElementById('f-role'),fTech=document.getElementById('f-tech'),fYear=document.getElementById('f-year'),list=document.getElementById('list');
-    function unique(arr){return Array.from(new Set(arr)).sort()}
+    // Tabs
+    const buttons = document.querySelectorAll('.nav-btn');
+    const sections = {
+      usp: document.getElementById('usp'),
+      projects: document.getElementById('projects'),
+      contact: document.getElementById('contact')
+    };
+
+    function showTab(key){
+      Object.keys(sections).forEach(k => sections[k].hidden = (k !== key));
+      buttons.forEach(b => b.classList.toggle('active', b.dataset.tab === key));
+      window.scrollTo({top:0,behavior:'smooth'});
+      if (key === 'projects') render();
+    }
+
+    buttons.forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
+    // Filter + Render
+    const q = document.getElementById('q');
+    const fSector = document.getElementById('f-sector');
+    const fRole = document.getElementById('f-role');
+    const fTech = document.getElementById('f-tech');
+    const fYear = document.getElementById('f-year');
+    const resetBtn = document.getElementById('reset');
+    const list = document.getElementById('list');
+
+    function unique(arr){return Array.from(new Set(arr)).sort((a,b)=>String(a).localeCompare(String(b)))}
+
     function seedFilters(){
-      unique(PROJECTS.map(p=>p.sector)).forEach(v=>fSector.innerHTML+=`<option>${v}</option>`);
-      unique(PROJECTS.map(p=>p.role)).forEach(v=>fRole.innerHTML+=`<option>${v}</option>`);
-      unique(PROJECTS.flatMap(p=>p.tech)).forEach(v=>fTech.innerHTML+=`<option>${v}</option>`);
-      unique(PROJECTS.map(p=>p.year)).sort((a,b)=>b-a).forEach(v=>fYear.innerHTML+=`<option>${v}</option>`);
+      unique(PROJECTS.map(p=>p.sector).filter(Boolean)).forEach(v=>fSector.insertAdjacentHTML('beforeend', `<option>${v}</option>`));
+      unique(PROJECTS.map(p=>p.role).filter(Boolean)).forEach(v=>fRole.insertAdjacentHTML('beforeend', `<option>${v}</option>`));
+      unique(PROJECTS.flatMap(p=>p.tech||[]).filter(Boolean)).forEach(v=>fTech.insertAdjacentHTML('beforeend', `<option>${v}</option>`));
+      unique(PROJECTS.map(p=>p.year).filter(Boolean)).sort((a,b)=>b-a).forEach(v=>fYear.insertAdjacentHTML('beforeend', `<option>${v}</option>`));
     }
+
     function matches(p){
-      const term=(q.value||'').toLowerCase();
-      return (!fSector.value||p.sector===fSector.value)&&(!fRole.value||p.role===fRole.value)&&(!fTech.value||(p.tech||[]).includes(fTech.value))&&(!fYear.value||String(p.year)===fYear.value)&&(!term||[p.title,p.client,(p.impact||[]).join(' ')].join(' ').toLowerCase().includes(term));
+      const term = (q.value||'').trim().toLowerCase();
+      const sOK = !fSector.value || p.sector===fSector.value;
+      const rOK = !fRole.value || p.role===fRole.value;
+      const tOK = !fTech.value || (p.tech||[]).includes(fTech.value);
+      const yOK = !fYear.value || String(p.year)===fYear.value;
+      const text = [p.title,p.client,(p.impact||[]).join(' ')].join(' ').toLowerCase();
+      const qOK = !term || text.includes(term);
+      return sOK && rOK && tOK && yOK && qOK;
     }
+
     function render(){
-      const items=PROJECTS.filter(matches);
-      list.innerHTML=items.map(p=>`<div class='card'><h3>${p.title}</h3><small>${p.client} · ${p.year}</small><div class='tags'><span class='tag'>${p.sector}</span><span class='tag'>${p.role}</span>${(p.tech||[]).map(t=>`<span class='tag'>${t}</span>`).join('')}</div><ul>${(p.impact||[]).map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+      const items = PROJECTS
+        .slice()
+        .sort((a,b)=>(b.year||0)-(a.year||0))
+        .filter(matches);
+
+      if (!items.length){
+        list.innerHTML = '<div class="card">Keine Treffer. Filter zurücksetzen oder Suchbegriff anpassen.</div>';
+        return;
+      }
+
+      list.innerHTML = items.map(p => `
+        <article class="card" aria-labelledby="${p.id}-h3">
+          <h3 id="${p.id}-h3">${p.title}</h3>
+          <p style="margin:0 0 8px;color:var(--muted)">${p.client || ''}${p.client && p.year ? ' · ' : ''}${p.year||''}</p>
+          <div class="tags">
+            <span class="tag">${p.sector||'-'}</span>
+            <span class="tag">${p.role||'-'}</span>
+            ${(p.tech||[]).map(t=>`<span class="tag">${t}</span>`).join('')}
+          </div>
+          <ul>${(p.impact||[]).map(x=>`<li>${x}</li>`).join('')}</ul>
+        </article>
+      `).join('');
     }
-    seedFilters();[q,fSector,fRole,fTech,fYear].forEach(el=>el.addEventListener('input',render));render();
+
+    function resetFilters(){
+      q.value = '';
+      fSector.value = '';
+      fRole.value = '';
+      fTech.value = '';
+      fYear.value = '';
+      render();
+    }
+
+    seedFilters();
+    [q,fSector,fRole,fTech,fYear].forEach(el=>el.addEventListener('input', render));
+    resetBtn.addEventListener('click', resetFilters);
+
+    // Default tab
+    showTab('usp');
   </script>
 </body>
 </html>
